@@ -2,18 +2,24 @@ version: '3'
 services:
   dnsmasq:
     restart: always
-    image: 4km3/dnsmasq
-    container_name: mydnsmasq
+    image: 4km3/dnsmasq:2.85-r2
+    container_name: dns
     environment:
-      TZ: "Asia/Tokyo"
+      TZ: "Asia/Shanghai"
     ports:
       - "53:53/udp"
       - "53:53/tcp"
     volumes:
-      - './PV/etc/dnsmasq.d:/etc/dnsmasq.d'
+      - './config/dnsmasq.d:/etc/dnsmasq.d'
     dns:
       - 8.8.8.8
+      - 114.114.114.114
       - 127.0.0.1
     cap_add:
       - NET_ADMIN
 
+
+networks:
+    default:
+        external:
+            name: domain-local
