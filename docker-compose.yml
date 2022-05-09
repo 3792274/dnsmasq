@@ -10,16 +10,10 @@ services:
       - "53:53/udp"
       - "53:53/tcp"
     volumes:
-      - './config/dnsmasq.d:/etc/dnsmasq.d'
+      - './dnsmasq.d:/etc/dnsmasq.d'
     dns:
       - 8.8.8.8
       - 114.114.114.114
       - 127.0.0.1
     cap_add:
       - NET_ADMIN
-
-
-networks:
-    default:
-        external:
-            name: domain-local
